@@ -10,7 +10,7 @@ const nunito = Nunito({
 
 export const metadata: Metadata = {
   title: "Benson's Hymn Games",
-  description: "Fun learning games to help kids memorize hymns and songs",
+  description: "Fun learning games to help kids memorize hymns and songs!",
 };
 
 export const viewport: Viewport = {
