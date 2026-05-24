@@ -13,6 +13,12 @@ import type {
   Song,
 } from "@/lib/types";
 import { ConfigureMemoryMatch } from "./ConfigureMemoryMatch";
+import { ConfigureFlashcards } from "./ConfigureFlashcards";
+import { ConfigureLyricMatch } from "./ConfigureLyricMatch";
+import { ConfigureVerseOrder } from "./ConfigureVerseOrder";
+import { ConfigureFillInBlank } from "./ConfigureFillInBlank";
+import { ConfigureBingo } from "./ConfigureBingo";
+import { ConfigureJeopardy } from "./ConfigureJeopardy";
 
 type WizardStep = 1 | 2 | 3;
 
@@ -399,14 +405,47 @@ function StepSettings({
           />
         )}
 
-        {type !== "memory-match" && (
-          <div className="bg-muted rounded-2xl p-6 text-center text-muted-foreground">
-            <p className="font-semibold mb-1">Coming soon</p>
-            <p className="text-sm">
-              Configuration for {GAME_TYPES[type].name} is implemented in a
-              later phase.
-            </p>
-          </div>
+        {type === "flashcards" && (
+          <ConfigureFlashcards
+            settings={settings as Extract<GameSettings, { flipDirection: "lyric-to-song" | "song-to-lyric" }>}
+            onChange={onSettingsChange}
+          />
+        )}
+
+        {type === "lyric-match" && (
+          <ConfigureLyricMatch
+            settings={settings as Extract<GameSettings, { matchType: "line-halves" | "question-answer" | "song-lyric" }>}
+            onChange={onSettingsChange}
+          />
+        )}
+
+        {type === "verse-order" && (
+          <ConfigureVerseOrder
+            settings={settings as Extract<GameSettings, { granularity: "verses" | "lines" }>}
+            onChange={onSettingsChange}
+          />
+        )}
+
+        {type === "fill-in-blank" && (
+          <ConfigureFillInBlank
+            settings={settings as Extract<GameSettings, { difficulty: "easy" | "medium" | "hard" }>}
+            onChange={onSettingsChange}
+          />
+        )}
+
+        {type === "bingo" && (
+          <ConfigureBingo
+            settings={settings as Extract<GameSettings, { cardSize: 3 | 4 | 5 }>}
+            onChange={onSettingsChange}
+          />
+        )}
+
+        {type === "jeopardy" && (
+          <ConfigureJeopardy
+            songs={songs}
+            settings={settings as Extract<GameSettings, { categories: { name: string; questions: { points: number; clue: string; answer: string; songId?: string }[] }[] }>}
+            onChange={onSettingsChange}
+          />
         )}
       </div>
     </>
