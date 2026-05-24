@@ -5,6 +5,7 @@ import { HeroSection } from "@/components/home/HeroSection";
 import { GameTypeGrid } from "@/components/home/GameTypeGrid";
 import { StatsBanner } from "@/components/home/StatsBanner";
 import { GAME_TYPE_LIST } from "@/lib/game-types";
+import { countSongs } from "@/lib/data/songs";
 
 export default async function HomePage() {
   const session = await auth();
@@ -44,13 +45,16 @@ export default async function HomePage() {
   }
 
   // Personalized home for signed-in users.
-  // Real counts are wired in tasks 22 (songs) and 34 (games + recent).
+  // Game counts (created/played, recent games) wired in task 34.
+  const userId = session.user.id;
+  const songsAdded = await countSongs(userId);
+
   return (
     <>
       <HeroSection />
       <GameTypeGrid />
       <StatsBanner
-        songsAdded={0}
+        songsAdded={songsAdded}
         gamesCreated={0}
         gamesPlayed={0}
         gameTypes={GAME_TYPE_LIST.length}
