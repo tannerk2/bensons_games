@@ -2,7 +2,6 @@
 
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { GAME_TYPE_LIST } from "@/lib/game-types";
-import { gameTypeSchema } from "@/lib/validation/game";
 
 export function GameTypeFilter() {
   const router = useRouter();
@@ -32,10 +31,4 @@ export function GameTypeFilter() {
       ))}
     </select>
   );
-}
-
-export function getValidatedType(raw: string | undefined) {
-  if (!raw) return undefined;
-  const result = gameTypeSchema.safeParse(raw);
-  return result.success ? result.data : undefined;
 }

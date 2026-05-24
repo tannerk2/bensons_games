@@ -3,7 +3,8 @@ import { Plus } from "lucide-react";
 import { auth } from "@/lib/auth";
 import { listGames } from "@/lib/data/games";
 import { GameList } from "@/components/games/GameList";
-import { GameTypeFilter, getValidatedType } from "@/components/games/GameTypeFilter";
+import { GameTypeFilter } from "@/components/games/GameTypeFilter";
+import { getValidatedType } from "@/lib/validation/game";
 import { PageLayout } from "@/components/page-layout";
 
 export default async function GamesPage({

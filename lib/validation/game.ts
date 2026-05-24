@@ -101,6 +101,12 @@ export const gameTypeSchema = z.enum([
   "memory-match",
 ]);
 
+export function getValidatedType(raw: string | undefined) {
+  if (!raw) return undefined;
+  const result = gameTypeSchema.safeParse(raw);
+  return result.success ? result.data : undefined;
+}
+
 export const gameInputSchema = z
   .object({
     gameType: gameTypeSchema,
