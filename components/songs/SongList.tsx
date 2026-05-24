@@ -20,11 +20,25 @@ export function SongList({ songs }: SongListProps) {
     s.title.toLowerCase().includes(query.trim().toLowerCase())
   );
 
-  const handleDelete = (song: Song) => {
+  const handleDelete = async (song: Song) => {
     if (!confirm(`Delete "${song.title}"?`)) return;
     setDeletingId(song.id);
     startTransition(async () => {
-      await deleteSongAction(song.id);
+      const first = await deleteSongAction(song.id);
+      if (first.ok) {
+        setDeletingId(null);
+        return;
+      }
+      // Has references — confirm with the user.
+      const names = first.references.map((r) => r.name).join(", ");
+      const proceed = confirm(
+        `"${song.title}" is used by ${first.references.length} game${first.references.length === 1 ? "" : "s"} (${names}). Deleting the song may break those games. Delete anyway?`
+      );
+      if (!proceed) {
+        setDeletingId(null);
+        return;
+      }
+      await deleteSongAction(song.id, { force: true });
       setDeletingId(null);
     });
   };

@@ -10,6 +10,7 @@ import {
   deleteSong,
   updateSong,
 } from "@/lib/data/songs";
+import { findGamesReferencingSong } from "@/lib/data/games";
 
 export type SongActionResult =
   | { ok: true }
@@ -68,8 +69,26 @@ export async function updateSongAction(
   redirect("/songs");
 }
 
-export async function deleteSongAction(id: string): Promise<void> {
+export async function deleteSongAction(
+  id: string,
+  opts?: { force?: boolean }
+): Promise<
+  | { ok: true }
+  | { ok: false; references: { id: string; name: string }[] }
+> {
   const userId = await requireUserId();
+
+  if (!opts?.force) {
+    const refs = await findGamesReferencingSong(userId, id);
+    if (refs.length > 0) {
+      return {
+        ok: false,
+        references: refs.map((g) => ({ id: g.id, name: g.name })),
+      };
+    }
+  }
+
   await deleteSong(userId, id);
   revalidatePath("/songs");
+  return { ok: true };
 }
