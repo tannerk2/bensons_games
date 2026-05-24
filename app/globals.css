@@ -1,54 +1,34 @@
 @import "tailwindcss";
 
-@theme {
+@theme inline {
   /* Kid-friendly color palette */
   --color-primary: #4A90D9;
-  --color-primary-light: #6BA5E7;
-  --color-primary-dark: #3A7BC8;
-  
-  --color-secondary: #FF7B54;
-  --color-secondary-light: #FF9A7A;
-  --color-secondary-dark: #E86A45;
-  
-  --color-accent: #FFD93D;
-  --color-accent-light: #FFE566;
-  --color-accent-dark: #F5C800;
-  
-  --color-success: #6BCB77;
-  --color-success-light: #8DD896;
-  --color-success-dark: #5AB868;
-  
-  --color-error: #FF6B6B;
-  --color-error-light: #FF8A8A;
-  --color-error-dark: #E85555;
-  
+  --color-muted: #F5F0E8;
+  --color-muted-foreground: #636E72;
   --color-background: #FFF9F0;
-  --color-surface: #FFFFFF;
-  --color-surface-elevated: #FFFCF7;
-  
   --color-foreground: #2D3436;
-  --color-foreground-muted: #636E72;
-  --color-foreground-subtle: #B2BEC3;
-  
   --color-border: #DFE6E9;
-  --color-border-light: #F0F3F4;
+  --color-card: #FFFFFF;
+  --color-card-foreground: #2D3436;
+  
+  /* Game colors */
+  --color-game-blue: #4A90D9;
+  --color-game-coral: #FF7B54;
+  --color-game-yellow: #FFD93D;
+  --color-game-green: #6BCB77;
+  --color-game-purple: #9B59B6;
   
   /* Typography */
   --font-sans: "Nunito", ui-sans-serif, system-ui, sans-serif;
   --font-mono: ui-monospace, monospace;
   
-  /* Spacing */
+  /* Border radius */
   --radius-sm: 0.5rem;
   --radius-md: 1rem;
   --radius-lg: 1.5rem;
   --radius-xl: 2rem;
-  --radius-full: 9999px;
-  
-  /* Shadows */
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.07), 0 2px 4px -2px rgb(0 0 0 / 0.07);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.08), 0 4px 6px -4px rgb(0 0 0 / 0.08);
-  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.08), 0 8px 10px -6px rgb(0 0 0 / 0.08);
+  --radius-2xl: 1.5rem;
+  --radius-3xl: 2rem;
 }
 
 /* Base styles */
@@ -62,7 +42,6 @@ body {
   color: var(--color-foreground);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 /* Focus styles for accessibility */
@@ -73,31 +52,34 @@ body {
 
 /* Selection colors */
 ::selection {
-  background-color: var(--color-accent);
+  background-color: var(--color-game-yellow);
   color: var(--color-foreground);
 }
 
-/* Smooth transitions for interactive elements */
+/* Smooth transitions */
 button, a, input, select, textarea {
   transition: all 0.2s ease-in-out;
 }
 
-/* Custom scrollbar for webkit browsers */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--color-border-light);
-  border-radius: var(--radius-full);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--color-foreground-subtle);
-  border-radius: var(--radius-full);
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--color-foreground-muted);
+/* Custom utility classes */
+@layer utilities {
+  .shadow-soft {
+    box-shadow: 0 4px 14px -2px rgba(0, 0, 0, 0.08);
+  }
+  
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  .text-pretty {
+    text-wrap: pretty;
+  }
+  
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+  
+  .perspective-1000 {
+    perspective: 1000px;
+  }
 }
