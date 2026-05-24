@@ -1,0 +1,155 @@
+.empty-state {
+  max-width: 400px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 60px 30px;
+}
+
+.empty-icon {
+  font-size: 4rem;
+  margin-bottom: 20px;
+}
+
+.empty-state h2 {
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.empty-state p {
+  color: #666;
+  margin-bottom: 25px;
+}
+
+.games-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 25px;
+}
+
+.game-card {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+  transition: transform 0.3s, box-shadow 0.3s;
+  position: relative;
+}
+
+.game-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.game-thumbnail {
+  height: 160px;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.thumbnail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  width: 120px;
+  height: 120px;
+}
+
+.thumb-img {
+  border-radius: 6px;
+  overflow: hidden;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.thumb-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.thumb-text {
+  font-size: 0.6rem;
+  font-weight: 600;
+  color: #333;
+  text-align: center;
+  padding: 4px;
+  word-break: break-word;
+  overflow: hidden;
+}
+
+.game-info {
+  padding: 20px;
+}
+
+.game-name {
+  font-size: 1.2rem;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.game-meta {
+  display: flex;
+  gap: 8px;
+  color: #888;
+  font-size: 0.9rem;
+}
+
+.game-actions {
+  display: flex;
+  gap: 10px;
+  padding: 0 20px 20px;
+}
+
+.game-actions .btn {
+  flex: 1;
+  padding: 10px;
+  font-size: 0.9rem;
+  text-decoration: none;
+  text-align: center;
+}
+
+.game-actions .btn-secondary {
+  background: #2196F3;
+  color: white;
+}
+
+.game-actions .btn-secondary:hover {
+  background: #1976D2;
+}
+
+.delete-confirm {
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.95);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  padding: 20px;
+}
+
+.delete-confirm p {
+  font-weight: 600;
+  color: #333;
+}
+
+.confirm-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.library-footer {
+  text-align: center;
+  margin-top: 40px;
+}
+
+@media (max-width: 600px) {
+  .games-grid {
+    grid-template-columns: 1fr;
+  }
+}
