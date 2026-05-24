@@ -1,0 +1,85 @@
+@import "tailwindcss";
+
+@theme inline {
+  /* Kid-friendly color palette */
+  --color-primary: #4A90D9;
+  --color-muted: #F5F0E8;
+  --color-muted-foreground: #636E72;
+  --color-background: #FFF9F0;
+  --color-foreground: #2D3436;
+  --color-border: #DFE6E9;
+  --color-card: #FFFFFF;
+  --color-card-foreground: #2D3436;
+  
+  /* Game colors */
+  --color-game-blue: #4A90D9;
+  --color-game-coral: #FF7B54;
+  --color-game-yellow: #FFD93D;
+  --color-game-green: #6BCB77;
+  --color-game-purple: #9B59B6;
+  
+  /* Typography */
+  --font-sans: "Nunito", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, monospace;
+  
+  /* Border radius */
+  --radius-sm: 0.5rem;
+  --radius-md: 1rem;
+  --radius-lg: 1.5rem;
+  --radius-xl: 2rem;
+  --radius-2xl: 1.5rem;
+  --radius-3xl: 2rem;
+}
+
+/* Base styles */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Focus styles for accessibility */
+:focus-visible {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* Selection colors */
+::selection {
+  background-color: var(--color-game-yellow);
+  color: var(--color-foreground);
+}
+
+/* Smooth transitions */
+button, a, input, select, textarea {
+  transition: all 0.2s ease-in-out;
+}
+
+/* Custom utility classes */
+@layer utilities {
+  .shadow-soft {
+    box-shadow: 0 4px 14px -2px rgba(0, 0, 0, 0.08);
+  }
+  
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  .text-pretty {
+    text-wrap: pretty;
+  }
+  
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+  
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+}

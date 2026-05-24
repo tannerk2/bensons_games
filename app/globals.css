@@ -1,0 +1,52 @@
+@import "tailwindcss";
+
+@theme inline {
+  /* Typography */
+  --font-sans: var(--font-nunito), system-ui, sans-serif;
+
+  /* Surface tokens */
+  --color-background: #fff9f0;
+  --color-foreground: #2d3748;
+  --color-muted: #f0ede8;
+  --color-muted-foreground: #6b7280;
+  --color-card: #ffffff;
+  --color-card-foreground: #2d3748;
+  --color-border: #e5e1dc;
+
+  /* Primary */
+  --color-primary: #4a90d9;
+  --color-primary-foreground: #ffffff;
+
+  /* Game accent palette */
+  --color-game-blue: #4a90d9;
+  --color-game-coral: #ff7b54;
+  --color-game-yellow: #ffd93d;
+  --color-game-green: #6bcb77;
+  --color-game-purple: #9b59b6;
+  --color-game-pink: #e91e63;
+
+  /* Radii and shadows */
+  --radius-soft: 1rem;
+  --radius-card: 1.5rem;
+  --shadow-soft: 0 4px 20px rgb(0 0 0 / 0.08);
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    background-color: var(--color-background);
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    color: var(--color-foreground);
+    background: var(--color-background);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
