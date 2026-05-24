@@ -4,14 +4,19 @@ import { auth } from "@/lib/auth";
 import { HeroSection } from "@/components/home/HeroSection";
 import { GameTypeGrid } from "@/components/home/GameTypeGrid";
 import { StatsBanner } from "@/components/home/StatsBanner";
+import { ContinuePlaying } from "@/components/home/ContinuePlaying";
 import { GAME_TYPE_LIST } from "@/lib/game-types";
 import { countSongs } from "@/lib/data/songs";
+import {
+  countGames,
+  countGamesByType,
+  listRecentGames,
+} from "@/lib/data/games";
 
 export default async function HomePage() {
   const session = await auth();
 
   if (!session?.user) {
-    // Marketing landing for signed-out visitors.
     return (
       <main className="flex flex-1 items-center justify-center p-6 sm:p-12">
         <div className="text-center max-w-xl">
@@ -44,19 +49,25 @@ export default async function HomePage() {
     );
   }
 
-  // Personalized home for signed-in users.
-  // Game counts (created/played, recent games) wired in task 34.
   const userId = session.user.id;
-  const songsAdded = await countSongs(userId);
+  const [songsAdded, gamesCreated, gamesPlayed, countsByType, recent] =
+    await Promise.all([
+      countSongs(userId),
+      countGames(userId),
+      countGames(userId, { played: true }),
+      countGamesByType(userId),
+      listRecentGames(userId, 3),
+    ]);
 
   return (
     <>
       <HeroSection />
-      <GameTypeGrid />
+      <GameTypeGrid counts={countsByType} />
+      <ContinuePlaying games={recent} />
       <StatsBanner
         songsAdded={songsAdded}
-        gamesCreated={0}
-        gamesPlayed={0}
+        gamesCreated={gamesCreated}
+        gamesPlayed={gamesPlayed}
         gameTypes={GAME_TYPE_LIST.length}
       />
     </>
